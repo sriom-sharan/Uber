@@ -24,17 +24,16 @@ This is the backend API for the Uber Clone application. It provides endpoints fo
 
 The base URL for all endpoints is:
 
-
-### Authentication
+## Authentication
 
 - All API requests (except for public routes like registration and login) require authentication.
 - Authentication is done via a **Bearer Token** in the `Authorization` header.
 
 ---
 
- ## <center> User Endpoints </center>
+## User Endpoints
 
-### 1.  *==/api/register==* - `POST` 
+### 1.  */api/users/register* - `POST` 
 
 #### Description
 This endpoint is used to register a new user by providing the user's details.
@@ -75,8 +74,39 @@ This endpoint is used to register a new user by providing the user's details.
     }
   ]
 }
-
 ```
+### 2.  */api/users/login* - `POST` 
+
+#### Description
+This endpoint is used to login user by providing the user's details.
+ 
+##### Request Body
+```
+{
+   "email": (email),
+   "password": (string)
+}
+```
+##### Response
+ - Success (201)
+``` 
+{
+  "token": (JWT token),
+  "user": {
+    "id": (string),
+    "firstname": (string),
+    "lastname": (string),
+    "email": (email)
+  }
+}
+```
+ - Error (401): If the required fields are wrong.
+``` 
+{
+      "message": "Invalid email or password"
+}
+```
+
 ---
 ### Error Codes
 The API returns standard HTTP status codes to indicate the status of the request:
@@ -105,11 +135,11 @@ The application requires the following environment variables to be set:
 ### Running Locally
 **1. Clone the repository:**
 
-```git clone https://github.com/yourusername/uber-clone-backend.git ```
+```git clone https://github.com/yourusername/uber.git ```
 
 **2. Navigate to the project folder:**
 ```
-cd uber-clone-backend
+cd uber/backend
 ```
 **3. Install dependencies:**
 ```
